@@ -1,4 +1,4 @@
-# Title: Voodoo Casting Bar
+## Title: Voodoo Casting Bar
 ## Script - Addon
 ## Game: World of Worcraft
 
@@ -19,7 +19,7 @@ Right now, VCB adds:
 - The Latency of the casting spell with a red bar!
 - The Ticks of a channeled spell!
 - All those features are movable, and you can choose which will be visible!
-- Color the player's casting bar! You can choose to color the casting bar according to your Class's Color!
+- Color the player's casting bar! You can choose to color the casting bar according to your Class's Color, or according to the Spell's School!
 - The Target’s Casting Bar becomes movable and scalable!
 - The Focus' Casting Bar becomes movable and scalable!
 - Works with Shadowed Unit Frame a.k.a SUF! Please read the instructions in the options!
