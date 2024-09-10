@@ -1,5 +1,5 @@
 ## Title: Voodoo Casting Bar
-## Script - Addon
+## Category: Script - Addon
 ## Game: World of Worcraft
 
 Voodoo Casting Bar (VCB) is an add on that enchants the default casting bar. You can open the options panel in three ways.
