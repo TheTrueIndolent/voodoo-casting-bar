@@ -166,7 +166,7 @@ local function AscendingDescendingSec(self)
 		end
 	end
 end
---[[ coloring the bar --
+-- coloring the bar --
 local function CastBarColor(self)
 	if VCBrTarget["Color"] == "Default Color" then
 		self:SetStatusBarDesaturated(false)
@@ -175,7 +175,7 @@ local function CastBarColor(self)
 		self:SetStatusBarDesaturated(true)
 		self:SetStatusBarColor(vcbClassColorTarget:GetRGB())
 	end
-end]]
+end
 -- Hooking Time part 1 --
 TargetFrameSpellBar:HookScript("OnShow", function(self)
 	NameTextPosition(self, "NameText", VCBnameText)
