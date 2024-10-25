@@ -442,11 +442,11 @@ local function VCBSpellQueueBar(var1)
 	var1:Hide()
 end
 -- SpellQueue Bar 1 --
-local VCBLagChannelCastBar = PlayerCastingBarFrame:CreateTexture(nil, "OVERLAY", nil, 7)
-VCBSpellQueueBar(VCBLagChannelCastBar)
+local VCBSpellQueueCastBar = PlayerCastingBarFrame:CreateTexture(nil, "OVERLAY", nil, 7)
+VCBSpellQueueBar(VCBSpellQueueCastBar)
 -- SpellQueue Bar 2 --
-local VCBSpellQueueBar2 = PlayerCastingBarFrame:CreateTexture(nil, "OVERLAY", nil, 7)
-VCBSpellQueueBar(VCBSpellQueueBar2)
+local VCBSpellQueueChannelBar = PlayerCastingBarFrame:CreateTexture(nil, "OVERLAY", nil, 7)
+VCBSpellQueueBar(VCBSpellQueueChannelBar)
 -- Player Casting SpellQueue Bar --
 local function PlayerCastSpellQueueBar(arg3)
 	local playerSpell = IsSpellKnownOrOverridesKnown(arg3)
@@ -456,10 +456,10 @@ local function PlayerCastSpellQueueBar(arg3)
 		local totalCastTime = statusMax - statusMin
 		local spellQueueWindow = math.min(GetSpellQueueWindow() / 1000 / totalCastTime, 1)
 		local spellQueueWidth = (PlayerCastingBarFrame:GetWidth() * spellQueueWindow) - lagBarWidth
-		VCBLagChannelCastBar:ClearAllPoints()
-		VCBLagChannelCastBar:SetWidth(spellQueueWidth)
-        VCBLagChannelCastBar:SetPoint("RIGHT", PlayerCastingBarFrame, "RIGHT", -lagBarWidth, 0)
-		VCBLagChannelCastBar:Show()
+		VCBSpellQueueCastBar:ClearAllPoints()
+		VCBSpellQueueCastBar:SetWidth(spellQueueWidth)
+        VCBSpellQueueCastBar:SetPoint("RIGHT", PlayerCastingBarFrame, "RIGHT", -lagBarWidth, 0)
+		VCBSpellQueueCastBar:Show()
 	end
 end
 
@@ -472,10 +472,10 @@ local function PlayerChannelSpellQueueBar(arg3)
 		local totalCastTime = statusMax - statusMin
 		local spellQueueWindow = math.min(GetSpellQueueWindow() / 1000 / totalCastTime, 1)
 		local spellQueueWidth = (PlayerCastingBarFrame:GetWidth() * spellQueueWindow) - lagBarWidth
-		VCBLagChannelCastBar:ClearAllPoints()
-		VCBLagChannelCastBar:SetWidth(spellQueueWidth)
-		VCBLagChannelCastBar:SetPoint("RIGHT", PlayerCastingBarFrame, "RIGHT", lagBarWidth, 0)
-		VCBLagChannelCastBar:Show()
+		VCBSpellQueueChannelBar:ClearAllPoints()
+		VCBSpellQueueChannelBar:SetWidth(spellQueueWidth)
+		VCBSpellQueueChannelBar:SetPoint("LEFT", PlayerCastingBarFrame, "LEFT", lagBarWidth, 0)
+		VCBSpellQueueChannelBar:Show()
 	end
 end
 
@@ -489,8 +489,8 @@ local function VCBlagBars(var1)
 	var1:Hide()
 end
 -- Lag Bar 1 --
-local VCBCastLagBar = PlayerCastingBarFrame:CreateTexture(nil, "OVERLAY", nil, 7)
-VCBlagBars(VCBCastLagBar)
+local VCBLagCastBar = PlayerCastingBarFrame:CreateTexture(nil, "OVERLAY", nil, 7)
+VCBlagBars(VCBLagCastBar)
 -- Lag Bar 2 --
 local VCBLagChannelBar = PlayerCastingBarFrame:CreateTexture(nil, "OVERLAY", nil, 7)
 VCBlagBars(VCBLagChannelBar)
@@ -506,12 +506,12 @@ local function PlayerCastLagBar(arg3)
 		lagWidth = lagTotal / (statusMax - statusMin)
 		lagBarWidth = PlayerCastingBarFrame:GetWidth() * lagWidth
 		if lagBarWidth == 0 then
-			VCBCastLagBar:Hide()
+			VCBLagCastBar:Hide()
 		else
-			VCBCastLagBar:ClearAllPoints()
-			VCBCastLagBar:SetWidth(lagBarWidth)
-			VCBCastLagBar:SetPoint("RIGHT", PlayerCastingBarFrame, "RIGHT", 0, 0)
-			VCBCastLagBar:Show()
+			VCBLagCastBar:ClearAllPoints()
+			VCBLagCastBar:SetWidth(lagBarWidth)
+			VCBLagCastBar:SetPoint("RIGHT", PlayerCastingBarFrame, "RIGHT", 0, 0)
+			VCBLagCastBar:Show()
 		end
 	end
 end
@@ -956,18 +956,20 @@ local function EventsTime(self, event, arg1, arg2, arg3, arg4)
 		lagStart = GetTime()
 	elseif event == "UNIT_SPELLCAST_START" and arg1 == "player" then
 		vcbHideTicks()
-		VCBCastLagBar:Hide()
+		VCBLagCastBar:Hide()
 		VCBLagChannelBar:Hide()
-		VCBLagChannelCastBar:Hide()
+		VCBSpellQueueCastBar:Hide()
+		VCBSpellQueueChannelBar:Hide()
 		VCBCastBarFrame1:Show()
 		VCBarg3 = arg3
 		PlayerCastLagBar(arg3)
 		PlayerCastSpellQueueBar(arg3)
 	elseif event == "UNIT_SPELLCAST_CHANNEL_START" and arg1 == "player" then
 		vcbHideTicks()
-		VCBCastLagBar:Hide()
+		VCBLagCastBar:Hide()
 		VCBLagChannelBar:Hide()
-		VCBLagChannelCastBar:Hide()
+		VCBSpellQueueCastBar:Hide()
+		VCBSpellQueueChannelBar:Hide()
 		VCBCastBarFrame1:Show()
 		vcbChannelSpellID = arg3
 		VCBarg3 = arg3
