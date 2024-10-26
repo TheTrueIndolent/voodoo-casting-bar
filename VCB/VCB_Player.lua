@@ -450,8 +450,7 @@ VCBSpellQueueBar(VCBSpellQueueChannelBar)
 -- Player Casting SpellQueue Bar --
 local function PlayerCastSpellQueueBar(arg3)
 	local playerSpell = IsSpellKnownOrOverridesKnown(arg3)
-	-- TODO: Add Options to check to see if the player actually wants this or not.
-	if playerSpell then
+	if playerSpell and VCBrPlayer["QueueBar"] == "Show" then
 		statusMin, statusMax = PlayerCastingBarFrame:GetMinMaxValues()
 		local totalCastTime = statusMax - statusMin
 		local spellQueueWindow = math.min(GetSpellQueueWindow() / 1000 / totalCastTime, 1)
@@ -466,8 +465,7 @@ end
 -- Player Channeling SpellQueue Bar --
 local function PlayerChannelSpellQueueBar(arg3)
 	local playerSpell = IsSpellKnownOrOverridesKnown(arg3)
-	-- TODO: Add Options to check to see if the player actually wants this or not.
-	if playerSpell then
+	if playerSpell and VCBrPlayer["QueueBar"] == "Show" then
 		statusMin, statusMax = PlayerCastingBarFrame:GetMinMaxValues()
 		local totalCastTime = statusMax - statusMin
 		local spellQueueWindow = math.min(GetSpellQueueWindow() / 1000 / totalCastTime, 1)
