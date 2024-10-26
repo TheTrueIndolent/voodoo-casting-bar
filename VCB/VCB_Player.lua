@@ -872,6 +872,190 @@ local function vcbHideTicks()
 		Hide4Ticks()
 	end
 end
+-- textures of the classic GCD --
+local function ClassIcon(self)
+	local a
+	local b
+	self:SetSwipeTexture("interface/hud/uiunitframeclassicons2x")
+	if select(3, C_PlayerInfo.GetClass(PlayerLocation:CreateFromUnit("player"))) == 1 then --Warrior
+		a = CreateVector2D(0.478515625, 0.478515625) -- left, top
+		b = CreateVector2D(0.712890625, 0.712890625) -- right, bottom
+	elseif select(3, C_PlayerInfo.GetClass(PlayerLocation:CreateFromUnit("player"))) == 2 then --Paladin
+		a = CreateVector2D(0.240234375, 0.240234375)
+		b = CreateVector2D(0.474609375, 0.474609375)
+	elseif select(3, C_PlayerInfo.GetClass(PlayerLocation:CreateFromUnit("player"))) == 3 then --Hunter
+		a = CreateVector2D(0.001953125, 0.240234375)
+		b = CreateVector2D(0.236328125, 0.474609375)
+	elseif select(3, C_PlayerInfo.GetClass(PlayerLocation:CreateFromUnit("player"))) == 4 then --Rogue
+		a = CreateVector2D(0.716796875, 0.240234375)
+		b = CreateVector2D(0.951171875, 0.474609375)
+	elseif select(3, C_PlayerInfo.GetClass(PlayerLocation:CreateFromUnit("player"))) == 5 then --Priest
+		a = CreateVector2D(0.478515625, 0.240234375)
+		b = CreateVector2D(0.712890625, 0.474609375)
+	elseif select(3, C_PlayerInfo.GetClass(PlayerLocation:CreateFromUnit("player"))) == 6 then --Death Kight
+		a = CreateVector2D(0.001953125, 0.236328125)
+		b = CreateVector2D(0.001953125, 0.236328125)
+	elseif select(3, C_PlayerInfo.GetClass(PlayerLocation:CreateFromUnit("player"))) == 7 then --Shaman
+		a = CreateVector2D(0.240234375, 0.478515625)
+		b = CreateVector2D(0.474609375, 0.712890625)
+	elseif select(3, C_PlayerInfo.GetClass(PlayerLocation:CreateFromUnit("player"))) == 8 then --Mage
+		a = CreateVector2D(0.001953125, 0.478515625)
+		b = CreateVector2D(0.236328125, 0.712890625)
+	elseif select(3, C_PlayerInfo.GetClass(PlayerLocation:CreateFromUnit("player"))) == 9 then --Warlock
+		a = CreateVector2D(0.240234375, 0.716796875)
+		b = CreateVector2D(0.474609375, 0.951171875)
+	elseif select(3, C_PlayerInfo.GetClass(PlayerLocation:CreateFromUnit("player"))) == 10 then --Monk
+		a = CreateVector2D(0.001953125, 0.716796875)
+		b = CreateVector2D(0.236328125, 0.951171875)
+	elseif select(3, C_PlayerInfo.GetClass(PlayerLocation:CreateFromUnit("player"))) == 11 then --Druid
+		a = CreateVector2D(0.478515625, 0.001953125)
+		b = CreateVector2D(0.712890625, 0.236328125)
+	elseif select(3, C_PlayerInfo.GetClass(PlayerLocation:CreateFromUnit("player"))) == 12 then --Demon Hunter
+		a = CreateVector2D(0.240234375, 0.001953125)
+		b = CreateVector2D(0.474609375, 0.236328125)
+	elseif select(3, C_PlayerInfo.GetClass(PlayerLocation:CreateFromUnit("player"))) == 13 then --Evoker
+		a = CreateVector2D(0.716796875, 0.001953125)
+		b = CreateVector2D(0.951171875, 0.236328125)
+	end
+	self:SetTexCoordRange(a, b)
+end
+local function HeroIcon(self)
+	local a
+	local b
+	self:SetSwipeTexture("interface/talentframe/talentsheroclassicons")
+	local chkTalentID = C_ClassTalents.GetLastSelectedSavedConfigID(PlayerUtil.GetCurrentSpecID())
+	local hero = C_ClassTalents.GetActiveHeroTalentSpec()
+	local subTreeInfo = C_Traits.GetSubTreeInfo(chkTalentID, hero)
+	if subTreeInfo.name == "Deathbringer" then
+		a = CreateVector2D(0.00048828125, 0.0009765625)
+		b = CreateVector2D(0.09814453125, 0.1962890625)
+	elseif subTreeInfo.name == "Rider of the Apocalypse" then
+		a = CreateVector2D(0.00048828125, 0.1982421875)
+		b = CreateVector2D(0.09814453125, 0.3935546875)
+	elseif subTreeInfo.name == "San'layn" then
+		a = CreateVector2D(0.00048828125, 0.3955078125)
+		b = CreateVector2D(0.09814453125, 0.5908203125)
+	elseif subTreeInfo.name == "Aldrachi Reaver" then
+		a = CreateVector2D(0.00048828125, 0.5927734375)
+		b = CreateVector2D(0.09814453125, 0.7880859375)
+	elseif subTreeInfo.name == "Fel-Scarred" then
+		a = CreateVector2D(0.00048828125, 0.7900390625)
+		b = CreateVector2D(0.09814453125, 0.9853515625)
+	elseif subTreeInfo.name == "Druid of the Claw" then
+		a = CreateVector2D(0.09912109375, 0.0009765625)
+		b = CreateVector2D(0.19677734375, 0.1962890625)
+	elseif subTreeInfo.name == "Elune's Chosen" then
+		a = CreateVector2D(0.09912109375, 0.1982421875)
+		b = CreateVector2D(0.19677734375, 0.3935546875)
+	elseif subTreeInfo.name == "Keeper of the Grove" then
+		a = CreateVector2D(0.09912109375, 0.3955078125)
+		b = CreateVector2D(0.19677734375, 0.5908203125)
+	elseif subTreeInfo.name == "Wildstalker" then
+		a = CreateVector2D(0.09912109375, 0.5927734375)
+		b = CreateVector2D(0.19677734375, 0.7880859375)
+	elseif subTreeInfo.name == "Chronowarden" then
+		a = CreateVector2D(0.09912109375, 0.7900390625)
+		b = CreateVector2D(0.19677734375, 0.9853515625)
+	elseif subTreeInfo.name == "Flameshaper" then
+		a = CreateVector2D(0.19775390625, 0.0009765625)
+		b = CreateVector2D(0.29541015625, 0.1962890625)
+	elseif subTreeInfo.name == "Scalecommander" then
+		a = CreateVector2D(0.19775390625, 0.1982421875)
+		b = CreateVector2D(0.29541015625, 0.3935546875)
+	elseif subTreeInfo.name == "Dark Ranger" then
+		a = CreateVector2D(0.19775390625, 0.3955078125)
+		b = CreateVector2D(0.29541015625, 0.5908203125)
+	elseif subTreeInfo.name == "Pack Leader" then
+		a = CreateVector2D(0.19775390625, 0.5927734375)
+		b = CreateVector2D(0.29541015625, 0.7880859375)
+	elseif subTreeInfo.name == "Sentinel" then
+		a = CreateVector2D(0.19775390625, 0.7900390625)
+		b = CreateVector2D(0.29541015625, 0.9853515625)
+	elseif subTreeInfo.name == "Frostfire" then
+		a = CreateVector2D(0.29638671875, 0.0009765625)
+		b = CreateVector2D(0.39404296875, 0.1962890625)
+	elseif subTreeInfo.name == "Spellslinger" then
+		a = CreateVector2D(0.29638671875, 0.1982421875)
+		b = CreateVector2D(0.39404296875, 0.3935546875)
+	elseif subTreeInfo.name == "Sunfury" then
+		a = CreateVector2D(0.29638671875, 0.3955078125)
+		b = CreateVector2D(0.39404296875, 0.5908203125)
+	elseif subTreeInfo.name == "Conduit of the Celestials" then
+		a = CreateVector2D(0.29638671875, 0.5927734375)
+		b = CreateVector2D(0.39404296875, 0.7880859375)
+	elseif subTreeInfo.name == "Master of Harmony" then
+		a = CreateVector2D(0.59228515625, 0.7900390625)
+		b = CreateVector2D(0.68994140625, 0.9853515625)
+	elseif subTreeInfo.name == "Shado-pan" then
+		a = CreateVector2D(0.29638671875, 0.7900390625)
+		b = CreateVector2D(0.39404296875, 0.9853515625)
+	elseif subTreeInfo.name == "Herald of the Sun" then
+		a = CreateVector2D(0.39501953125, 0.0009765625)
+		b = CreateVector2D(0.49267578125, 0.1962890625)
+	elseif subTreeInfo.name == "Lightsmith" then
+		a = CreateVector2D(0.39501953125, 0.1982421875)
+		b = CreateVector2D(0.49267578125, 0.3935546875)
+	elseif subTreeInfo.name == "Templar" then
+		a = CreateVector2D(0.39501953125, 0.3955078125)
+		b = CreateVector2D(0.49267578125, 0.5908203125)
+	elseif subTreeInfo.name == "Archon" then
+		a = CreateVector2D(0.39501953125, 0.5927734375)
+		b = CreateVector2D(0.49267578125, 0.7880859375)
+	elseif subTreeInfo.name == "Oracle" then
+		a = CreateVector2D(0.39501953125, 0.7900390625)
+		b = CreateVector2D(0.49267578125, 0.9853515625)
+	elseif subTreeInfo.name == "Voidweaver" then
+		a = CreateVector2D(0.49365234375, 0.0009765625)
+		b = CreateVector2D(0.59130859375, 0.1962890625)
+	elseif subTreeInfo.name == "Deathstalker" then
+		a = CreateVector2D(0.49365234375, 0.1982421875)
+		b = CreateVector2D(0.59130859375, 0.3935546875)
+	elseif subTreeInfo.name == "Fatebound" then
+		a = CreateVector2D(0.49365234375, 0.3955078125)
+		b = CreateVector2D(0.59130859375, 0.5908203125)
+	elseif subTreeInfo.name == "Trickster" then
+		a = CreateVector2D(0.49365234375, 0.5927734375)
+		b = CreateVector2D(0.59130859375, 0.7880859375)
+	elseif subTreeInfo.name == "Farseer" then
+		a = CreateVector2D(0.49365234375, 0.7900390625)
+		b = CreateVector2D(0.59130859375, 0.9853515625)
+	elseif subTreeInfo.name == "Stormbringer" then
+		a = CreateVector2D(0.59228515625, 0.0009765625)
+		b = CreateVector2D(0.68994140625, 0.1962890625)
+	elseif subTreeInfo.name == "Totemic" then
+		a = CreateVector2D(0.69091796875, 0.0009765625)
+		b = CreateVector2D(0.78857421875, 0.1962890625)
+	elseif subTreeInfo.name == "Diabolist" then
+		a = CreateVector2D(0.78955078125, 0.0009765625)
+		b = CreateVector2D(0.88720703125, 0.1962890625)
+	elseif subTreeInfo.name == "Hellcaller" then
+		a = CreateVector2D(0.69091796875, 0.1982421875)
+		b = CreateVector2D(0.78857421875, 0.3935546875)
+	elseif subTreeInfo.name == "Soul Harvester" then
+		a = CreateVector2D(0.88818359375, 0.0009765625)
+		b = CreateVector2D(0.98583984375, 0.1962890625)
+	elseif subTreeInfo.name == "Colossus" then
+		a = CreateVector2D(0.59228515625, 0.1982421875)
+		b = CreateVector2D(0.68994140625, 0.3935546875)
+	elseif subTreeInfo.name == "Mountain Thane" then
+		a = CreateVector2D(0.59228515625, 0.3955078125)
+		b = CreateVector2D(0.68994140625, 0.5908203125)
+	elseif subTreeInfo.name == "Slayer" then
+		a = CreateVector2D(0.59228515625, 0.5927734375)
+		b = CreateVector2D(0.68994140625, 0.7880859375)
+	end
+	self:SetTexCoordRange(a, b)
+end
+local function FactionIcon(self)
+	local a = CreateVector2D(0, 0)
+	local b = CreateVector2D(1, 1)
+	if vcbFaction.name == "Alliance" then
+	self:SetSwipeTexture("interface/ICONS/UI_AllianceIcon-round")
+	elseif vcbFaction.name == "Horde" then
+	self:SetSwipeTexture("interface/ICONS/UI_HordeIcon-round")
+	end
+	self:SetTexCoordRange(a, b)
+end
 -- Hooking Time part 1 --
 PlayerCastingBarFrame:HookScript("OnShow", function(self)
 	if VCBrPlayer["Icon"] == "Left" then
@@ -950,6 +1134,20 @@ local function EventsTime(self, event, arg1, arg2, arg3, arg4)
 		PlayerCastingBarFrame.Icon:SetScale(1.3)
 		PlayerCastingBarFrame.Icon:AdjustPointsOffset(2, -4)
 		vcbCreateTicks()
+		-- create the GCD --
+		function vcbCreatingTheGCD()
+			vcbFrameGCDparent:SetScale(PlayerCastingBarFrame.Icon:GetEffectiveScale())
+			vcbFrameGCDparent:ClearAllPoints()
+			vcbFrameGCDparent:SetPoint("RIGHT", PlayerCastingBarFrame.Icon, "LEFT", -4, 0)
+			if VCBrPlayer["GCD"]["ClassicTexture"] == "Class Icon" then
+				ClassIcon(vcbFrameGCD)
+			elseif VCBrPlayer["GCD"]["ClassicTexture"] == "Hero Icon" then
+				HeroIcon(vcbFrameGCD)
+			elseif VCBrPlayer["GCD"]["ClassicTexture"] == "Faction Icon" then
+				FactionIcon(vcbFrameGCD)
+			end
+		end
+		vcbCreatingTheGCD()
 	elseif event == "CURRENT_SPELL_CAST_CHANGED" and arg1 == false then
 		lagStart = GetTime()
 	elseif event == "UNIT_SPELLCAST_START" and arg1 == "player" then
@@ -989,6 +1187,12 @@ local function EventsTime(self, event, arg1, arg2, arg3, arg4)
 		end
 	elseif event == "UNIT_SPELLCAST_SENT" and arg1 == "player" then
 		vcbSpellSchool = 0
+		local spellCooldownInfo = C_Spell.GetSpellCooldown(61304)
+		if spellCooldownInfo.duration > 0 then
+			if VCBrPlayer["GCD"]["ClassicTexture"] ~= "Hide" then
+				vcbFrameGCD:SetCooldown(GetTime(), spellCooldownInfo.duration - (GetTime() - lagStart))
+			end
+		end
 	elseif event == "UNIT_SPELLCAST_INTERRUPTED" and arg1 == "player" then
 		vcbSpellSchool = 0
 	end
