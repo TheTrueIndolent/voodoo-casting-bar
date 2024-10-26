@@ -420,6 +420,65 @@ local lagTotal = 0
 local statusMin = 0
 local statusMax = 0
 local lagWidth = 0
+local lagBarWidth = 0
+
+local function VCBCastBarFrame(var1)
+	var1:SetTexture("Interface\\CastingBar\\UI-CastingBar-Frame")
+	var1:SetHeight(PlayerCastingBarFrame:GetHeight())
+	var1:SetWidth(PlayerCastingBarFrame:GetWidth())
+	var1:Hide()
+end
+
+local VCBCastBarFrame1 = PlayerCastingBarFrame:CreateTexture(nil, "OVERLAY", nil, 7)
+VCBCastBarFrame(VCBCastBarFrame1)
+
+-- Spell Queue Window Bar --
+local function VCBSpellQueueBar(var1)
+	var1:SetTexture("Interface\\RAIDFRAME\\Raid-Bar-Hp-Fill")
+	var1:SetHeight(PlayerCastingBarFrame:GetHeight())
+	var1:SetVertexColor(0, 1, 0)
+	var1:SetAlpha(0.75)
+	var1:SetBlendMode("ADD")
+	var1:Hide()
+end
+-- SpellQueue Bar 1 --
+local VCBSpellQueueCastBar = PlayerCastingBarFrame:CreateTexture(nil, "OVERLAY", nil, 7)
+VCBSpellQueueBar(VCBSpellQueueCastBar)
+-- SpellQueue Bar 2 --
+local VCBSpellQueueChannelBar = PlayerCastingBarFrame:CreateTexture(nil, "OVERLAY", nil, 7)
+VCBSpellQueueBar(VCBSpellQueueChannelBar)
+-- Player Casting SpellQueue Bar --
+local function PlayerCastSpellQueueBar(arg3)
+	local playerSpell = IsSpellKnownOrOverridesKnown(arg3)
+	-- TODO: Add Options to check to see if the player actually wants this or not.
+	if playerSpell then
+		statusMin, statusMax = PlayerCastingBarFrame:GetMinMaxValues()
+		local totalCastTime = statusMax - statusMin
+		local spellQueueWindow = math.min(GetSpellQueueWindow() / 1000 / totalCastTime, 1)
+		local spellQueueWidth = (PlayerCastingBarFrame:GetWidth() * spellQueueWindow) - lagBarWidth
+		VCBSpellQueueCastBar:ClearAllPoints()
+		VCBSpellQueueCastBar:SetWidth(spellQueueWidth)
+        VCBSpellQueueCastBar:SetPoint("RIGHT", PlayerCastingBarFrame, "RIGHT", -lagBarWidth, 0)
+		VCBSpellQueueCastBar:Show()
+	end
+end
+
+-- Player Channeling SpellQueue Bar --
+local function PlayerChannelSpellQueueBar(arg3)
+	local playerSpell = IsSpellKnownOrOverridesKnown(arg3)
+	-- TODO: Add Options to check to see if the player actually wants this or not.
+	if playerSpell then
+		statusMin, statusMax = PlayerCastingBarFrame:GetMinMaxValues()
+		local totalCastTime = statusMax - statusMin
+		local spellQueueWindow = math.min(GetSpellQueueWindow() / 1000 / totalCastTime, 1)
+		local spellQueueWidth = (PlayerCastingBarFrame:GetWidth() * spellQueueWindow) - lagBarWidth
+		VCBSpellQueueChannelBar:ClearAllPoints()
+		VCBSpellQueueChannelBar:SetWidth(spellQueueWidth)
+		VCBSpellQueueChannelBar:SetPoint("LEFT", PlayerCastingBarFrame, "LEFT", lagBarWidth, 0)
+		VCBSpellQueueChannelBar:Show()
+	end
+end
+
 -- function for the lag bars --
 local function VCBlagBars(var1)
 	var1:SetTexture("Interface\\RAIDFRAME\\Raid-Bar-Hp-Fill")
@@ -430,37 +489,46 @@ local function VCBlagBars(var1)
 	var1:Hide()
 end
 -- Lag Bar 1 --
-local VCBlagBar1 = PlayerCastingBarFrame:CreateTexture(nil, "OVERLAY", nil, 7)
-VCBlagBars(VCBlagBar1)
+local VCBLagCastBar = PlayerCastingBarFrame:CreateTexture(nil, "OVERLAY", nil, 7)
+VCBlagBars(VCBLagCastBar)
 -- Lag Bar 2 --
-local VCBlagBar2 = PlayerCastingBarFrame:CreateTexture(nil, "OVERLAY", nil, 7)
-VCBlagBars(VCBlagBar2)
+local VCBLagChannelBar = PlayerCastingBarFrame:CreateTexture(nil, "OVERLAY", nil, 7)
+VCBlagBars(VCBLagChannelBar)
 -- Player Casting Latency Bar --
 local function PlayerCastLagBar(arg3)
-	local playerSpell = IsPlayerSpell(arg3)
+	local playerSpell = IsSpellKnownOrOverridesKnown(arg3)
+	lagBarWidth = 0
 	if playerSpell and VCBrPlayer["LagBar"] == "Show" then
 		lagEnd = GetTime()
 		lagTotal = (lagEnd - lagStart)
 		statusMin, statusMax = PlayerCastingBarFrame:GetMinMaxValues()
+		-- print("Status: "statusMin, " + ", statusMax)
 		lagWidth = lagTotal / (statusMax - statusMin)
-		VCBlagBar1:ClearAllPoints()
-		VCBlagBar1:SetWidth(PlayerCastingBarFrame:GetWidth() * lagWidth)
-		VCBlagBar1:SetPoint("RIGHT", PlayerCastingBarFrame, "RIGHT", 0, 0)
-		VCBlagBar1:Show()
+		lagBarWidth = PlayerCastingBarFrame:GetWidth() * lagWidth
+		if lagBarWidth == 0 then
+			VCBLagCastBar:Hide()
+		else
+			VCBLagCastBar:ClearAllPoints()
+			VCBLagCastBar:SetWidth(lagBarWidth)
+			VCBLagCastBar:SetPoint("RIGHT", PlayerCastingBarFrame, "RIGHT", 0, 0)
+			VCBLagCastBar:Show()
+		end
 	end
 end
 -- Player Channeling Latency Bar --
 local function PlayerChannelLagBar(arg3)
-	local playerSpell = IsPlayerSpell(arg3)
+	local playerSpell = IsSpellKnownOrOverridesKnown(arg3)
+	lagBarWidth = 0
 	if playerSpell and VCBrPlayer["LagBar"] == "Show" then
 		lagEnd = GetTime()
 		lagTotal = (lagEnd - lagStart)
 		statusMin, statusMax = PlayerCastingBarFrame:GetMinMaxValues()
 		lagWidth = lagTotal / (statusMax - statusMin)
-		VCBlagBar2:ClearAllPoints()
-		VCBlagBar2:SetWidth(PlayerCastingBarFrame:GetWidth() * lagWidth)
-		VCBlagBar2:SetPoint("LEFT", PlayerCastingBarFrame, "LEFT", 0, 0)
-		VCBlagBar2:Show()
+		lagBarWidth = PlayerCastingBarFrame:GetWidth() * lagWidth
+		VCBLagChannelBar:ClearAllPoints()
+		VCBLagChannelBar:SetWidth(lagBarWidth)
+		VCBLagChannelBar:SetPoint("LEFT", PlayerCastingBarFrame, "LEFT", 0, 0)
+		VCBLagChannelBar:Show()
 	end
 end
 -- Creating the ticks for the player's castbar --
@@ -888,17 +956,25 @@ local function EventsTime(self, event, arg1, arg2, arg3, arg4)
 		lagStart = GetTime()
 	elseif event == "UNIT_SPELLCAST_START" and arg1 == "player" then
 		vcbHideTicks()
-		VCBlagBar1:Hide()
-		VCBlagBar2:Hide()
+		VCBLagCastBar:Hide()
+		VCBLagChannelBar:Hide()
+		VCBSpellQueueCastBar:Hide()
+		VCBSpellQueueChannelBar:Hide()
+		VCBCastBarFrame1:Show()
 		VCBarg3 = arg3
 		PlayerCastLagBar(arg3)
+		PlayerCastSpellQueueBar(arg3)
 	elseif event == "UNIT_SPELLCAST_CHANNEL_START" and arg1 == "player" then
 		vcbHideTicks()
-		VCBlagBar1:Hide()
-		VCBlagBar2:Hide()
+		VCBLagCastBar:Hide()
+		VCBLagChannelBar:Hide()
+		VCBSpellQueueCastBar:Hide()
+		VCBSpellQueueChannelBar:Hide()
+		VCBCastBarFrame1:Show()
 		vcbChannelSpellID = arg3
 		VCBarg3 = arg3
 		PlayerChannelLagBar(arg3)
+		PlayerChannelSpellQueueBar(arg3)
 	elseif event == "COMBAT_LOG_EVENT_UNFILTERED" then
 		local timestamp, subevent, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags = CombatLogGetCurrentEventInfo()
 		local spellId, spellName, spellSchool = select(12, CombatLogGetCurrentEventInfo())
