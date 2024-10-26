@@ -1176,7 +1176,7 @@ local function EventsTime(self, event, arg1, arg2, arg3, arg4)
 		local spellId, spellName, spellSchool = select(12, CombatLogGetCurrentEventInfo())
 		if subevent == "SPELL_CAST_START" and sourceName == UnitFullName("player") then
 			vcbSpellSchool = spellSchool
-		elseif subevent == "SPELL_CAST_SUCCESS" and spellId == vcbChannelSpellID and sourceName == UnitFullName("player") then
+		elseif subevent == "SPELL_CAST_SUCCESS" and sourceName == UnitFullName("player") then
 			vcbSpellSchool = spellSchool
 		elseif subevent == "SPELL_AURA_APPLIED" and sourceName == UnitFullName("player") and spellId == 356995 then
 			vcbEvokerTicksFirstTime = true
