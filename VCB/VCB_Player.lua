@@ -352,19 +352,6 @@ local function Color_Class(self)
 	self.Flash:SetDesaturated(true)
 	self.Flash:SetVertexColor(vcbClassColorPlayer:GetRGB())
 end
--- faction color --
-local function Color_Faction(self)
-	self:SetStatusBarDesaturated(true)
-	self:SetStatusBarColor(vcbFactionColor:GetRGB())
-	self.Spark:SetDesaturated(true)
-	self.Spark:SetVertexColor(vcbFactionColor:GetRGB())
-	self.ChannelShadow:SetDesaturated(true)
-	self.ChannelShadow:SetVertexColor(vcbFactionColor:GetRGB())
-	self.StandardGlow:SetDesaturated(true)
-	self.StandardGlow:SetVertexColor(vcbFactionColor:GetRGB())
-	self.Flash:SetDesaturated(true)
-	self.Flash:SetVertexColor(vcbFactionColor:GetRGB())
-end
 -- Spell School color --
 local function Color_SpellSchool(self)
 	self:SetStatusBarDesaturated(true)
@@ -579,8 +566,6 @@ local function CastBarColor(self)
 			Color_Default(self)
 		elseif VCBrPlayer["Color"] == "Class' Color" then
 			Color_Class(self)
-		elseif VCBrPlayer["Color"] == "Faction Color" then
-			Color_Faction(self)
 		elseif VCBrPlayer["Color"] == "Spell School Color" then
 			Color_SpellSchool(self)
 		end
@@ -1210,16 +1195,6 @@ local function HeroIcon(self)
 	end
 	self:SetTexCoordRange(a, b)
 end
-local function FactionIcon(self)
-	local a = CreateVector2D(0, 0)
-	local b = CreateVector2D(1, 1)
-	if vcbFaction.name == "Alliance" then
-	self:SetSwipeTexture("interface/ICONS/UI_AllianceIcon-round")
-	elseif vcbFaction.name == "Horde" then
-	self:SetSwipeTexture("interface/ICONS/UI_HordeIcon-round")
-	end
-	self:SetTexCoordRange(a, b)
-end
 -- Hooking Time part 1 --
 PlayerCastingBarFrame:HookScript("OnShow", function(self)
 	if VCBrPlayer["Icon"] == "Left" then
@@ -1307,8 +1282,6 @@ local function EventsTime(self, event, arg1, arg2, arg3, arg4)
 				ClassIcon(vcbFrameGCD)
 			elseif VCBrPlayer["GCD"]["ClassicTexture"] == "Hero Icon" then
 				HeroIcon(vcbFrameGCD)
-			elseif VCBrPlayer["GCD"]["ClassicTexture"] == "Faction Icon" then
-				FactionIcon(vcbFrameGCD)
 			end
 		end
 		vcbCreatingTheGCD()
