@@ -421,14 +421,13 @@ end)
 vcbOptions1Box6PopOut2Choice0.Text:SetText("Hide")
 vcbOptions1Box6PopOut2Choice1.Text:SetText("Class Icon")
 vcbOptions1Box6PopOut2Choice2.Text:SetText("Hero Icon")
-vcbOptions1Box6PopOut2Choice3.Text:SetText("Faction Icon")
 -- parent & sort --
-for i = 1, 3, 1 do
+for i = 1, 2, 1 do
 	_G["vcbOptions1Box6PopOut2Choice"..i]:SetParent(vcbOptions1Box6PopOut2Choice0)
 	_G["vcbOptions1Box6PopOut2Choice"..i]:SetPoint("TOP", _G["vcbOptions1Box6PopOut2Choice"..i-1], "BOTTOM", 0, 0)
 end
 -- clicking --
-for i = 0, 3, 1 do
+for i = 0, 2, 1 do
 	_G["vcbOptions1Box6PopOut2Choice"..i]:HookScript("OnClick", function(self, button, down)
 		if button == "LeftButton" and down == false then
 			VCBrPlayer["GCD"]["ClassicTexture"] = self.Text:GetText()
