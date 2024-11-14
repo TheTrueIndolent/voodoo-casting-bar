@@ -11,7 +11,10 @@ end
 vcbOptions00Tab1.Text:SetText("Player's Castbar")
 vcbOptions00Tab2.Text:SetText("Target's Castbar")
 vcbOptions00Tab3.Text:SetText("Focus' Castbar")
-vcbOptions00Tab4.Text:SetText("Profiles")
+vcbOptions00Tab4.Text:SetText("Boss' Castbar")
+vcbOptions00Tab5.Text:SetText("Arena's Castbar")
+vcbOptions00Tab5:Hide()
+vcbOptions00Tab6.Text:SetText("Profiles")
 -- hiding the center text --
 for i = 1, 3, 1 do
 	_G["vcbOptions00Tab"..i].CenterTxt:Hide()
