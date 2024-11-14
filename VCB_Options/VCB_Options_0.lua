@@ -16,16 +16,16 @@ vcbOptions00Tab5.Text:SetText("Arena's Castbar")
 vcbOptions00Tab5:Hide()
 vcbOptions00Tab6.Text:SetText("Profiles")
 -- hiding the center text --
-for i = 1, 3, 1 do
+for i = 1, 5, 1 do
 	_G["vcbOptions00Tab"..i].CenterTxt:Hide()
 end
-vcbOptions00Tab4.CenterTxt:SetText("Thank you for using this amazing add-on!|nYou are a |cff00CED1Funky|r and a |cffFF0055Groovy|r person!|nMay the good |cff9400D3Mojo|r be with you!")
+vcbOptions00Tab6.CenterTxt:SetText("Thank you for using this amazing add-on!|nYou are a |cff00CED1Funky|r and a |cffFF0055Groovy|r person!|nMay the good |cff9400D3Mojo|r be with you!")
 vcbOptions00.BGtexture:SetGradient("VERTICAL", vcbNoMainColor, vcbMainColor)
 vcbOptions00.BGtexture:ClearAllPoints()
 vcbOptions00.BGtexture:SetPoint("TOPRIGHT", vcbOptions00, "TOPRIGHT", 0, 0)
-vcbOptions00.BGtexture:SetPoint("BOTTOMLEFT", vcbOptions00Tab4, "BOTTOMLEFT", 0, -128)
+vcbOptions00.BGtexture:SetPoint("BOTTOMLEFT", vcbOptions00Tab6, "BOTTOMLEFT", 0, -128)
 -- clicking on the tabs --
-for i = 1, 4, 1 do
+for i = 1, 6, 1 do
 	_G["vcbOptions00Tab"..i]:HookScript("OnClick", function(self, button, down)
 		if button == "LeftButton" and down == false then
 			if not _G["vcbOptions"..i]:IsShown() then _G["vcbOptions"..i]:Show() end
@@ -38,7 +38,7 @@ vcbOptions00:SetScript("OnShow", function(self)
 end)
 -- hiding the tabs --
 vcbOptions00:HookScript("OnHide", function(self)
-	for i = 1, 4, 1 do
+	for i = 1, 6, 1 do
 		if _G["vcbOptions"..i]:IsShown() then _G["vcbOptions"..i]:Hide() end
 	end
 end)
