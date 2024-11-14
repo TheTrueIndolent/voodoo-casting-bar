@@ -13,3 +13,4 @@ VCB_Zlave.xml
 VCB_Player.lua
 VCB_Target.lua
 VCB_Focus.lua
+VCB_Boss.lua
