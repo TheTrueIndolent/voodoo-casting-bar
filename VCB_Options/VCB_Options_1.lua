@@ -38,36 +38,76 @@ local function CheckSavedVariables()
 end
 -- icon & shield --
 local function IconShieldVisibility()
+	PlayerCastingBarFrame.Icon:SetScale(1.3)
+	if PlayerCastingBarFrame.showShield then PlayerCastingBarFrame.showShield = false end
 	if VCBrPlayer["Icon"] == "Left" then
-		if not PlayerCastingBarFrame.Icon:IsShown() then PlayerCastingBarFrame.Icon:Show() end
-		if not PlayerCastingBarFrame.showShield then PlayerCastingBarFrame.showShield = true end
-		if VCBiconSpell:IsShown() then VCBiconSpell:Hide() end
-		if VCBshieldSpellRight:IsShown() then VCBshieldSpellRight:Hide() end
-	elseif VCBrPlayer["Icon"] == "Right" then
-		if not VCBiconSpell:IsShown() then VCBiconSpell:Show() end
-		VCBiconSpell:SetTexture(PlayerCastingBarFrame.Icon:GetTextureFileID())
-		if PlayerCastingBarFrame.barType == "uninterruptable" then
-			if not VCBshieldSpellRight:IsShown() then VCBshieldSpellRight:Show() end
-		else
+		function vcbPlayerIconVisibility(self)
+			self.Icon:ClearAllPoints()
+			self.Icon:SetPoint("RIGHT", self, "LEFT", -2, -4)
+			if not self.Icon:IsShown() then self.Icon:Show() end
+			if self.barType == "uninterruptable" then
+				self.Icon:ClearAllPoints()
+				self.Icon:SetPoint("RIGHT", self, "LEFT", -8, -4)
+				if not VCBshieldSpellLeft:IsShown() then VCBshieldSpellLeft:Show() end
+			else
+				self.Icon:ClearAllPoints()
+				self.Icon:SetPoint("RIGHT", self, "LEFT", -2, -4)
+				if VCBshieldSpellLeft:IsShown() then VCBshieldSpellLeft:Hide() end
+			end
+			if VCBiconSpell:IsShown() then VCBiconSpell:Hide() end
 			if VCBshieldSpellRight:IsShown() then VCBshieldSpellRight:Hide() end
 		end
-		if PlayerCastingBarFrame.Icon:IsShown() then PlayerCastingBarFrame.Icon:Hide() end
-		if PlayerCastingBarFrame.showShield then PlayerCastingBarFrame.showShield = false end
+	elseif VCBrPlayer["Icon"] == "Right" then
+		function vcbPlayerIconVisibility(self)
+			VCBiconSpell:ClearAllPoints()
+			VCBiconSpell:SetPoint("LEFT", self, "RIGHT", 2, -4)
+			VCBiconSpell:SetTexture(self.Icon:GetTextureFileID())
+			if not VCBiconSpell:IsShown() then VCBiconSpell:Show() end
+			if self.barType == "uninterruptable" then
+				VCBiconSpell:ClearAllPoints()
+				VCBiconSpell:SetPoint("LEFT", self, "RIGHT", 8, -4)
+				if not VCBshieldSpellRight:IsShown() then VCBshieldSpellRight:Show() end
+			else
+				VCBiconSpell:ClearAllPoints()
+				VCBiconSpell:SetPoint("LEFT", self, "RIGHT", 2, -4)
+				if VCBshieldSpellRight:IsShown() then VCBshieldSpellRight:Hide() end
+			end
+			if self.Icon:IsShown() then self.Icon:Hide() end
+			if VCBshieldSpellLeft:IsShown() then VCBshieldSpellLeft:Hide() end
+		end
 	elseif VCBrPlayer["Icon"] == "Left and Right" then
-		if not PlayerCastingBarFrame.Icon:IsShown() then PlayerCastingBarFrame.Icon:Show() end
-		if not PlayerCastingBarFrame.showShield then PlayerCastingBarFrame.showShield = true end
-		if not VCBiconSpell:IsShown() then VCBiconSpell:Show() end
-		VCBiconSpell:SetTexture(PlayerCastingBarFrame.Icon:GetTextureFileID())
-		if PlayerCastingBarFrame.barType == "uninterruptable" then
-			if not VCBshieldSpellRight:IsShown() then VCBshieldSpellRight:Show() end
-		else
-			if VCBshieldSpellRight:IsShown() then VCBshieldSpellRight:Hide() end
+		function vcbPlayerIconVisibility(self)
+			self.Icon:ClearAllPoints()
+			self.Icon:SetPoint("RIGHT", self, "LEFT", -2, -4)
+			if not self.Icon:IsShown() then self.Icon:Show() end
+			VCBiconSpell:ClearAllPoints()
+			VCBiconSpell:SetPoint("LEFT", self, "RIGHT", 2, -4)
+			VCBiconSpell:SetTexture(self.Icon:GetTextureFileID())
+			if not VCBiconSpell:IsShown() then VCBiconSpell:Show() end
+			VCBiconSpell:SetTexture(self.Icon:GetTextureFileID())
+			if self.barType == "uninterruptable" then
+				self.Icon:ClearAllPoints()
+				self.Icon:SetPoint("RIGHT", self, "LEFT", -8, -4)
+				if not VCBshieldSpellLeft:IsShown() then VCBshieldSpellLeft:Show() end
+				VCBiconSpell:ClearAllPoints()
+				VCBiconSpell:SetPoint("LEFT", self, "RIGHT", 8, -4)
+				if not VCBshieldSpellRight:IsShown() then VCBshieldSpellRight:Show() end
+			else
+				self.Icon:ClearAllPoints()
+				self.Icon:SetPoint("RIGHT", self, "LEFT", -2, -4)
+				if VCBshieldSpellLeft:IsShown() then VCBshieldSpellLeft:Hide() end
+				VCBiconSpell:ClearAllPoints()
+				VCBiconSpell:SetPoint("LEFT", self, "RIGHT", 2, -4)
+				if VCBshieldSpellRight:IsShown() then VCBshieldSpellRight:Hide() end
+			end
 		end
 	elseif VCBrPlayer["Icon"] == "Hide" then
-		if PlayerCastingBarFrame.Icon:IsShown() then PlayerCastingBarFrame.Icon:Hide() end
-		if VCBiconSpell:IsShown() then VCBiconSpell:Hide() end
-		if PlayerCastingBarFrame.showShield then PlayerCastingBarFrame.showShield = false end
-		if VCBshieldSpellRight:IsShown() then VCBshieldSpellRight:Hide() end
+		function vcbPlayerIconVisibility(self)
+			if self.Icon:IsShown() then self.Icon:Hide() end
+			if VCBiconSpell:IsShown() then VCBiconSpell:Hide() end
+			if VCBshieldSpellLeft:IsShown() then VCBshieldSpellLeft:Hide() end
+			if VCBshieldSpellRight:IsShown() then VCBshieldSpellRight:Hide() end
+		end
 	end
 end
 -- Name position --
