@@ -2,9 +2,9 @@
 local function CreateGlobalVariables()
 -- Colors --
 	vcbMainColor = CreateColorFromRGBAHexString("F0E68CFF")
-	vcbHighColor = CreateColorFromRGBAHexString("9ACD32FF")
+	vcbHighColor = CreateColorFromRGBAHexString("ADFF05FF")
 	vcbNoMainColor = CreateColorFromRGBAHexString("F0E68C00")
-	vcbNoHighColor = CreateColorFromRGBAHexString("9ACD3200")
+	vcbNoHighColor = CreateColorFromRGBAHexString("ADFF0500")
 -- Spell School Color --
 	vcbPhysicalColor = CreateColorFromRGBAHexString("FFFF00FF") -- 1
 	vcbHolyColor = CreateColorFromRGBAHexString("FFE680FF") -- 2
@@ -167,3 +167,4 @@ local function EventsTime(self, event, arg1, arg2, arg3, arg4)
 	end
 end
 vcbZlave:SetScript("OnEvent", EventsTime)
+
