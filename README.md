@@ -2,11 +2,10 @@
 ## Category: Script - Addon
 ## Game: World of Warcraft
 
-Voodoo Casting Bar (VCB) is an add on that enchants the default casting bar. You can open the options panel in three ways.
+Voodoo Casting Bar (VCB) is an add on that enchants the default casting bar. You can open the options panel in two ways.
 
 1.	With the commands: /vcb and /voodoocastingbar
 2.	Through the game menu. Game Menu (Esc) --> Options --> AddOns
-3.	Through the minimap buttons that Blizzard gave us. It’s a tiny number at the top-left or bottom-left of the minimap, click it and you will find it.
 
 For the Player’s Cast Bar VCB can:
 
