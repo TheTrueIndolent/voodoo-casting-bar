@@ -1,4 +1,4 @@
-## Interface: 110205
+## Interface: 110207
 ## Category: Combat
 ## Category-deDE: Kampf
 ## Category-esES: Combate
@@ -16,7 +16,7 @@
 ## DefaultState: enabled
 ## LoadOnDemand: 1
 ## Dependencies: VCB
-## Version: 1.74
+## Version: 1.75
 ## Author: The_Indolent
 ## X-Website: https://panosanastasiou.rocks/
 
@@ -28,6 +28,7 @@ VCB_Options_3.xml
 VCB_Options_4.xml
 VCB_Options_5.xml
 VCB_Options_6.xml
+
 
 
 
