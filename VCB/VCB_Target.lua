@@ -689,8 +689,16 @@ local function EventsTime(self, event, arg1, arg2, arg3, arg4)
 	if event == "PLAYER_LOGIN" then
 		if VCBrTarget["otherAdddon"] == "None" then
 			TargetSpellBarTexts()
+			if VCBrTarget["Unlock"] then
+				TargetFrameSpellBar:HookScript("OnUpdate", function(self)
+					vcbTargetCastbarPosition(self)
+				end)
+			end
 		elseif VCBrTarget["otherAdddon"] == "Shadowed Unit Frame" then
 			sufTargetSpellBarTexts()
+			SUFUnittargetvcbCastbar:HookScript("OnUpdate", function(self)
+				vcbTargetCastbarPosition(self)
+			end)
 		end
 			chkTargetIconVisibility()
 			chkTargetNamePosition()
@@ -702,26 +710,16 @@ local function EventsTime(self, event, arg1, arg2, arg3, arg4)
 			chkTargetTotalTimeUpdate()
 			chkTargetCastbarColor()
 		if VCBrTarget["otherAdddon"] == "None" then
-			if not VCBrTarget["Unlock"] then
-				TargetFrameSpellBar:HookScript("OnUpdate", function(self)
-					self.Text:SetAlpha(0)
-					VCBnameTextTarget:SetText(self.Text:GetText())
+			TargetFrameSpellBar:HookScript("OnUpdate", function(self)
+				self.Text:SetAlpha(0)
+				VCBnameTextTarget:SetText(self.Text:GetText())
+				if self.value ~= nil and self.maxValue ~= nil then
 					vcbTargetCurrentTimeUpdate(self)
 					vcbTargetBothTimeUpdate(self)
 					vcbTargetTotalTimeUpdate(self)
 					vcbTargetCastbarColor(self)
-				end)
-			elseif VCBrTarget["Unlock"] then
-				TargetFrameSpellBar:HookScript("OnUpdate", function(self)
-					vcbTargetCastbarPosition(self)
-					self.Text:SetAlpha(0)
-					VCBnameTextTarget:SetText(self.Text:GetText())
-					vcbTargetCurrentTimeUpdate(self)
-					vcbTargetBothTimeUpdate(self)
-					vcbTargetTotalTimeUpdate(self)
-					vcbTargetCastbarColor(self)
-				end)
-			end
+				end
+			end)
 			TargetFrameSpellBar:HookScript("OnShow", function(self)
 				vcbTargetNamePosition(self)
 				vcbTargetCurrentTimePosition(self)
@@ -736,13 +734,14 @@ local function EventsTime(self, event, arg1, arg2, arg3, arg4)
 				vcbTargetTotalTimePosition(self)
 			end)
 			SUFUnittargetvcbCastbar:HookScript("OnUpdate", function(self)
-				vcbTargetCastbarPosition(self)
 				self.Text:SetAlpha(0)
 				VCBnameTextTarget:SetText(self.Text:GetText())
-				vcbTargetCurrentTimeUpdate(self)
-				vcbTargetBothTimeUpdate(self)
-				vcbTargetTotalTimeUpdate(self)
-				vcbTargetCastbarColor(self)
+				if self.value ~= nil and self.maxValue ~= nil then
+					vcbTargetCurrentTimeUpdate(self)
+					vcbTargetBothTimeUpdate(self)
+					vcbTargetTotalTimeUpdate(self)
+					vcbTargetCastbarColor(self)
+				end
 			end)
 		end
 	elseif event == "PLAYER_TARGET_CHANGED" then
