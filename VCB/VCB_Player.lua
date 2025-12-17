@@ -1725,6 +1725,7 @@ local function EventsTime(self, event, arg1, arg2, arg3, arg4)
 		vcbCreatingTheGCD()
 		-- Hooking Time part 1 --
 		PlayerCastingBarFrame:HookScript("OnShow", function(self)
+			VCBnameText:SetWidth(self:GetWidth())
 			vcbPlayerIconVisibility(self)
 			vcbPlayerNamePosition(self)
 			vcbPlayerCurrentTimePosition(self)
@@ -1806,5 +1807,3 @@ local function EventsTime(self, event, arg1, arg2, arg3, arg4)
 	end
 end
 vcbZlave:HookScript("OnEvent", EventsTime)
-
-
