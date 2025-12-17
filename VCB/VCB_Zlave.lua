@@ -148,6 +148,20 @@ local function FirstTimeSavedVariables()
 			otherAdddon = "None",
 		}
 	end
+	if VCBrArena == nil then
+		VCBrArena = { Unlock = false,
+			Position = {X = 0, Y = 0},
+			Scale = 100,
+			NameText = "Top",
+			CurrentTimeText = {Position = "Bottom Left", Direction = "Both", Sec = "Hide", Decimals = 2},
+			TotalTimeText = {Position = "Bottom Right", Sec = "Hide", Decimals = 2},
+			BothTimeText = {Position = "Hide", Direction = "Both", Sec = "Hide", Decimals = 2},
+			Color = "Default Color",
+			Art = "Default",
+			otherAdddon = "None",
+			Icon = "Show Icon & Shiled",
+		}
+	end
 	if VCBrPlayer["CurrentTimeText"]["Decimals"] == nil then VCBrPlayer["CurrentTimeText"]["Decimals"] = 2 end
 	if VCBrPlayer["TotalTimeText"]["Decimals"] == nil then VCBrPlayer["TotalTimeText"]["Decimals"] = 2 end
 	if VCBrPlayer["BothTimeText"]["Decimals"] == nil then VCBrPlayer["BothTimeText"]["Decimals"] = 2 end
@@ -157,7 +171,11 @@ local function FirstTimeSavedVariables()
 	if VCBrFocus["CurrentTimeText"]["Decimals"] == nil then VCBrFocus["CurrentTimeText"]["Decimals"] = 2 end
 	if VCBrFocus["TotalTimeText"]["Decimals"] == nil then VCBrFocus["TotalTimeText"]["Decimals"] = 2 end
 	if VCBrFocus["BothTimeText"]["Decimals"] == nil then VCBrFocus["BothTimeText"]["Decimals"] = 2 end
+	if VCBrPlayer["GCD"] == nil then VCBrPlayer["GCD"] = {ClassicTexture = "Class Icon",} end
 	if VCBrPlayer["QueueBar"] == nil then VCBrPlayer["QueueBar"] = "Show" end
+	if VCBrTarget["Icon"] == nil then VCBrTarget["Icon"] = "Show Icon & Shiled" end
+	if VCBrFocus["Icon"] == nil then VCBrFocus["Icon"] = "Show Icon & Shiled" end
+	if VCBrBoss["Icon"] == nil then VCBrBoss["Icon"] = "Show Icon & Shiled" end
 end
 -- Events Time --
 local function EventsTime(self, event, arg1, arg2, arg3, arg4)
@@ -167,4 +185,3 @@ local function EventsTime(self, event, arg1, arg2, arg3, arg4)
 	end
 end
 vcbZlave:SetScript("OnEvent", EventsTime)
-
