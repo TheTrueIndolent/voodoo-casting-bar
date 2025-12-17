@@ -13,7 +13,7 @@ vcbOptions00Tab2.Text:SetText("Target's Castbar")
 vcbOptions00Tab3.Text:SetText("Focus' Castbar")
 vcbOptions00Tab4.Text:SetText("Boss' Castbar")
 vcbOptions00Tab5.Text:SetText("Arena's Castbar")
-vcbOptions00Tab5:Hide()
+--vcbOptions00Tab5:Hide()
 vcbOptions00Tab6.Text:SetText("Profiles")
 -- hiding the center text --
 for i = 1, 5, 1 do
@@ -42,3 +42,4 @@ vcbOptions00:HookScript("OnHide", function(self)
 		if _G["vcbOptions"..i]:IsShown() then _G["vcbOptions"..i]:Hide() end
 	end
 end)
+
